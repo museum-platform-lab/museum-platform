@@ -1,0 +1,24 @@
+{
+  "snapshot_date": "2026-11-15",
+  "source_root": "D:/project/museum-platform",
+  "legacy_backend_root": "D:/project/cultural-museum",
+  "frontend_history": {
+    "repo": "D:/project/museum-platform/frontend",
+    "head": "9267289336fbe0cb3be62532e33efc0ef1a1942a",
+    "commits": 51,
+    "blobs": 208,
+    "findings": [],
+    "large": [],
+    "scope": "All objects reachable from valid local branch/remote/tag refs. Broken desktop.ini refs skipped without editing source. Remote not fetched: gh auth invalid. Regex scan is not a guarantee."
+  },
+  "history_policy": "New monorepo snapshot; source history/remotes untouched. Existing frontend history retained at original source, referenced by SHA and not imported because media rights are unverified.",
+  "changes_for_publication": [
+    "Environment placeholders for datasource/API/Compose credentials",
+    "JWT secret injected via Spring property instead of literal",
+    "Ignore patterns, examples, README, manifests and validation notes"
+  ],
+  "research_source_paths": [
+    "D:/project/museum-platform/research",
+    "D:/project/cultural-museum/project-blueprint"
+  ]
+}

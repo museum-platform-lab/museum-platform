@@ -1,0 +1,16 @@
+{
+  "manifest_version": "1.1",
+  "title": "Museum Platform Entity ID Migration Map",
+  "description": "Theo dõi việc khôi phục khóa ID legacy và cảnh báo tích hợp backend",
+  "entity_id_migrations": [
+    {
+      "entity_name": "Tử Cấm thành (Huế)",
+      "legacy_v1_id": "523",
+      "temporary_v2_id": "4836",
+      "final_production_id": "523",
+      "action": "RESTORED_TO_LEGACY_KEY",
+      "rationale": "Khôi phục ID 523 để đồng bộ với định danh gốc trong crawled_artifacts_new.csv và thư mục images/523_..., triệt tiêu bản ghi trùng tên 'Tạo Tử cấm thành (Huế)'.",
+      "backend_impact_warning": "LƯU Ý: Trong seed data cũ (backend/src/main/resources/artifacts.csv - 1.123 dòng), ID 523 từng thuộc về 'Tranh vẽ bình phong trước viện Cơ mật'. Khi import dataset mới vào backend, cần thực hiện migrate database schema hoặc re-seed toàn bộ để tránh xung đột khóa chính."
+    }
+  ]
+}

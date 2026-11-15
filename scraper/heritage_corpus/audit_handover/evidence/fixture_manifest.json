@@ -1,0 +1,87 @@
+{
+  "manifest_version": "2.0.0",
+  "generated_at": "2026-11-09T12:00:00Z",
+  "total_fixtures": 5,
+  "scope": "Regression and Gold Baseline Fixtures across Vietnamese and English",
+  "fixtures": [
+    {
+      "doc_id": "VNMH-VI-1001-73800",
+      "language": "vi",
+      "category_id": "1001",
+      "article_id": "73800",
+      "title": "Bảo vật quốc gia: Thạp Đào Thịnh",
+      "url": "https://baotanglichsu.vn/vi/Articles/1001/73800/bao-vat-quoc-gia-thap-djao-thinh.html",
+      "classification": "ARTIFACT_PROFILE",
+      "raw_file": "raw_documents/VNMH-VI-1001-73800.json",
+      "baseline_defects": [
+        "P1-14: summary_abstract duplicated inside canonical_clean_text",
+        "P1-15: RAG span drift (char_start/char_end mismatch)",
+        "P1-16: KG edge FK pointing to -SEC-001 while chunks named -CHK-001",
+        "P0-06: Fabricated CURRENTLY_HELD_BY relation without literal in-text custody evidence"
+      ],
+      "v2_verification": "PASS (Exact substring match 100%, valid FK 100%, zero fabricated custody)"
+    },
+    {
+      "doc_id": "VNMH-VI-1001-75069",
+      "language": "vi",
+      "category_id": "1001",
+      "article_id": "75069",
+      "title": "Bảo vật quốc gia: Mộ thuyền Việt Khê",
+      "url": "https://baotanglichsu.vn/vi/Articles/1001/75069/bao-vat-quoc-gia-mo-thuyen-viet-khe.html",
+      "classification": "ARTIFACT_PROFILE",
+      "raw_file": "raw_documents/VNMH-VI-1001-75069.json",
+      "baseline_defects": [
+        "P1-14: summary_abstract duplicated in clean text",
+        "P1-15: RAG span drift",
+        "P0-06: Fabricated custody relation"
+      ],
+      "v2_verification": "PASS"
+    },
+    {
+      "doc_id": "VNMH-VI-1001-76300",
+      "language": "vi",
+      "category_id": "1001",
+      "article_id": "76300",
+      "title": "Bảo vật Quốc gia - Sổ vàng Trường Nguyễn Ái Quốc (1949 - 1950)",
+      "url": "https://baotanglichsu.vn/vi/Articles/1001/76300/bao-vat-quoc-gia-so-vang-truong-nguyen-ai-quoc-1949-1950.html",
+      "classification": "ARTIFACT_PROFILE",
+      "raw_file": "raw_documents/VNMH-VI-1001-76300.json",
+      "baseline_defects": [
+        "P0-06: Author Lê Thị Hồng Thu assigned as CREATED_BY artifact creator instead of AUTHORED_BY document",
+        "P1-15: RAG span drift",
+        "P1-16: KG edge FK mismatch"
+      ],
+      "v2_verification": "PASS (Author correctly mapped to AUTHORED_BY document, 0 CREATED_BY violations)"
+    },
+    {
+      "doc_id": "VNMH-EN-1005-28454",
+      "language": "en",
+      "category_id": "1005",
+      "article_id": "28454",
+      "title": "Mug",
+      "url": "https://baotanglichsu.vn/en/Articles/1005/28454/mug.html",
+      "classification": "ARTIFACT_PROFILE",
+      "raw_file": "raw_documents/VNMH-EN-1005-28454.json",
+      "baseline_defects": [
+        "P1-12: English 'Materials:' parsed into single letter 's'",
+        "P1-15: Span drift on short descriptions"
+      ],
+      "v2_verification": "PASS (Material 's' rejected, exact spans verified)"
+    },
+    {
+      "doc_id": "VNMH-EN-3181-19143",
+      "language": "en",
+      "category_id": "3181",
+      "article_id": "19143",
+      "title": "Chu Dau pottery revival",
+      "url": "https://baotanglichsu.vn/en/Articles/3181/19143/chu-dau-pottery-revival.html",
+      "classification": "RESEARCH_ARTICLE",
+      "raw_file": "raw_documents/VNMH-EN-3181-19143.json",
+      "baseline_defects": [
+        "P1-15: Large research text chunking overflow and span misalignments",
+        "P2-19: Nested block text duplication in multi-paragraph body"
+      ],
+      "v2_verification": "PASS (Leaf-block DOM extraction, zero text duplication, token cap compliant)"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+# Local credentials and configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*service-account*.json
+credentials*.json
+# Dependencies and generated output
+node_modules/
+.next/
+out/
+dist/
+build/
+target/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+coverage/
+*.tsbuildinfo
+# Local tools, logs and OS metadata
+.idea/
+.vscode/
+*.iml
+*.log
+desktop.ini
+.DS_Store
+*.gdoc
+*.gsheet
+# External data and snapshots (see docs/external-data-manifest.json)
+*.db
+*.db-*
+*.sqlite*
+*.dump
+*.bak
+*.zip
+*.7z
+*.tar*
+/images/
+/scraper/images/
+/scraper/raw_pages/
+/scraper/test_raw_pages/
+/scraper/*.csv
+/scraper/*manifest.json
+/scraper/source_quality_flags.json
+/scraper/visited_urls*.txt
+/scraper/heritage_corpus/data*/
+/backend/src/main/resources/artifacts.csv
+/frontend/public/artifacts/
+/research/

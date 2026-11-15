@@ -1,0 +1,26 @@
+Issue_ID,Severity,Title,Root_Cause,Files_Modified,Unit_Tests,Acceptance_Gate,Status
+P0-01,P0,Bỏ qua Retry-After và thiếu domain rate limiting tôn trọng 429,Thiếu parser Retry-After và không cập nhật lịch retry,"adapters/base.py, state_manager.py, models.py","T-001, T-002, T-006",Gate G4 (Reliability),RESOLVED
+P0-02,P0,Race condition và thiếu transaction isolation khi claim queue URLs,Non-atomic SELECT + UPDATE không có locking worker lease,state_manager.py,"T-003, T-004, T-005",Gate G4 (Concurrency),RESOLVED
+P0-03,P0,Sai lệch chỉ số Span RAG (char_start char_end),Ghép summary_abstract vào text gây lệch offset ký tự,"rag_preparer.py, models.py, storage.py","T-015, T-016, T-017",Gate G2 (RAG Invariant),RESOLVED
+P0-04,P0,Lỗi Foreign Key 100% giữa KG Edges và Document Sections,Section ID không đồng nhất giữa -SEC-xxx và -CHK-xxx,"rag_preparer.py, kg_preparer.py, crawler.py","T-018, T-019",Gate G1 (FK Integrity),RESOLVED
+P0-05,P0,Sai lệch Ontology: Gán tác giả bài viết làm người tạo hiện vật,Heuristic gán author metadata thành CREATED_BY hiện vật,"kg_preparer.py, verify_corpus_integrity.py",T-021,Gate G3 (Ontology Separation),RESOLVED
+P0-06,P0,Bịa đặt quan hệ lưu giữ (CURRENTLY_HELD_BY) không có chứng cứ,Fallback mặc định bảo tàng khi thiếu thông tin lưu giữ,"vnmh_parser.py, kg_preparer.py",T-022,Gate G3 (Zero Fabrication),RESOLVED
+P1-07,P1,Vi phạm SQLite UNIQUE Constraint khi xử lý bài viết bỏ qua ngôn ngữ,Insert dummy SKIPPED_LANG vào crawled_documents,"state_manager.py, crawler.py",T-007,Gate G4 (State Machine),RESOLVED
+P1-08,P1,Thiếu SSRF Protection và chặn Private IP Range,Không kiểm tra loopback/private IP trong URL,"adapters/base.py, url_normalizer.py",T-009,Gate G5 (Safety),RESOLVED
+P1-09,P1,Lỗ hổng Redirect Hop Domain Bypass,requests tự động follow redirect ra domain ngoài,adapters/base.py,T-010,Gate G5 (Domain Boundary),RESOLVED
+P1-10,P1,Chính sách robots.txt Fail-Open khi gặp lỗi mạng,Timeout robots mặc định cho phép crawl thay vì fail-closed,adapters/base.py,T-011,Gate G5 (Robots Policy),RESOLVED
+P1-11,P1,Ghi đè file raw document khi bài viết cập nhật nội dung,Lưu đường dẫn cố định raw_documents/{doc_id}.json,storage.py,T-014,Gate G6 (Immutable Storage),RESOLVED
+P1-12,P1,False Positive trong trích xuất chất liệu (Materials -> s),RegEx trích xuất chữ s cuối nhãn Materials,"vnmh_parser.py, models.py","T-024, T-026",Gate G2 (Metadata Accuracy),RESOLVED
+P1-13,P1,Thiếu phân tách hạn ngạch discovery và articles,Dùng chung một hạn ngạch max_pages cho cả hai tầng,"crawler.py, run_heritage_corpus.py",T-013,Gate G4 (Crawler Operation),RESOLVED
+P1-14,P1,Duplicate summary_abstract trong canonical_clean_text,Nối abstract vào thân bài gây lặp đoạn văn,"vnmh_parser.py, models.py",T-015,Gate G2 (Text Quality),RESOLVED
+P1-15,P1,Chênh lệch độ dài Chunk và vi phạm Hard Token Cap,Không có cơ chế hard cap và cắt tỉa theo ranh giới từ,rag_preparer.py,T-017,Gate G2 (Token Cap),RESOLVED
+P1-16,P1,Bịa đặt trích dẫn (evidence_quote) trong KG Edges,Dùng chuỗi giải thích nhân tạo làm quote,"kg_preparer.py, models.py",T-020,Gate G3 (Literal Quote),RESOLVED
+P1-17,P1,Đoạn code lặp tiêu chí ARTIFACT_NAME_OVERLAP trong legacy_matcher,Copy-paste duplicate block if multi_score > score,legacy_matcher.py,T-028,Gate G1 (Matching Code),RESOLVED
+P1-18,P1,Fail Silently khi thiếu file legacy production CSV,Không bắt ngoại lệ thiếu file CSV production,legacy_matcher.py,T-028,Gate G1 (Dataset Resilience),RESOLVED
+P2-19,P2,Nhân bản nội dung do duyệt DOM đồng thời thẻ cha và con,get_text đồng thời trên container và paragraph,vnmh_parser.py,T-023,Gate G2 (Leaf DOM Traversal),RESOLVED
+P2-20,P2,False Positive trong trích xuất niên đại (era_culture = từ),RegEx bắt phải giới từ tiếng Việt,vnmh_parser.py,T-026,Gate G2 (Era Validation),RESOLVED
+P2-21,P2,Bỏ sót kích thước nhiều dòng (multiline dimensions),RegEx một dòng bỏ sót các thông số chiều cao đường kính,vnmh_parser.py,T-025,Gate G2 (Multiline Extractor),RESOLVED
+P2-22,P2,Không có cơ chế Quarantine cho trang rỗng / lỗi parse,Ghi nhận bài rỗng vào tập hợp hợp lệ thay vì cách ly,"vnmh_parser.py, crawler.py, models.py",T-027,Gate G4 (Quarantine Stage),RESOLVED
+P2-23,P2,Thiếu chuẩn hóa Unicode NFC trong đối sánh Legacy,So sánh chuỗi NFD với NFC không khớp,legacy_matcher.py,T-028,Gate G1 (Unicode NFC),RESOLVED
+P2-24,P2,Dry-run không cô lập hoàn toàn các side-effects ghi đĩa,dry-run vẫn tải body và ghi cập nhật trạng thái,"crawler.py, run_heritage_corpus.py",T-012,Gate G5 (Dry-run Purity),RESOLVED
+P2-25,P2,Source Registry thiếu adapter Wikimedia Commons và trạng thái STAGED,Chưa đăng ký adapter Commons và thiếu nhãn trạng thái,"source_registry.py, adapters/commons.py",T-010,Gate G5 (Source Governance),RESOLVED
